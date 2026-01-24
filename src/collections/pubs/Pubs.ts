@@ -5,6 +5,8 @@ export const Pubs: CollectionConfig = {
   slug: 'pubs',
   admin: {
     useAsTitle: 'title',
+    group: 'Directory',
+    description: 'Pubs and bars in the area',
   },
   fields: [
     { name: 'title', type: 'text', required: true },

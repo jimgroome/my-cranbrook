@@ -5,6 +5,8 @@ export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
+    group: 'Events',
+    description: 'Events happening in the area',
   },
   fields: [
     { name: 'title', type: 'text', required: true },

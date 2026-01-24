@@ -5,6 +5,8 @@ export const Sports: CollectionConfig = {
   slug: 'sports',
   admin: {
     useAsTitle: 'title',
+    group: 'Directory',
+    description: 'Sports clubs in the area',
   },
   fields: [
     { name: 'title', type: 'text', required: true },

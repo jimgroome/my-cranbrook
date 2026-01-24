@@ -12,6 +12,10 @@ import { Clubs } from './collections/clubs/Clubs'
 import { Organisations } from './collections/organisations/Organisations'
 import { Pubs } from './collections/pubs/Pubs'
 import { Sports } from './collections/sports/Sports'
+import { Pages } from './collections/pages/Pages'
+
+import { MainMenu } from './globals/MainMenu'
+import { Branding } from './globals/Branding'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +27,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, Clubs, Organisations, Pubs, Sports],
+  collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media],
+  globals: [MainMenu, Branding],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

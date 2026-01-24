@@ -5,6 +5,8 @@ export const Organisations: CollectionConfig = {
   slug: 'organisations',
   admin: {
     useAsTitle: 'title',
+    group: 'Directory',
+    description: 'Organisations in the area',
   },
   fields: [
     { name: 'title', type: 'text', required: true },
