@@ -1,8 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import { HighlightedContent } from '@/components/highlighted-content/HighlightedContent'
 
 const EventsPage = async () => {
   const payload = await getPayload({ config })
@@ -11,6 +11,12 @@ const EventsPage = async () => {
     where: { listing: { equals: 'events' } },
   })
 
+  if (!pageData.docs.length) {
+    return null
+  }
+
+  const page = pageData.docs[0]
+
   const events = await payload.find({
     collection: 'events',
     limit: 10,
@@ -18,7 +24,8 @@ const EventsPage = async () => {
   })
   return (
     <>
-      <Typography variant="h2">{pageData.docs[0].title}</Typography>
+      <Typography variant="h2">{page.title}</Typography>
+      <HighlightedContent highlightedContent={page.highlightedContent} />
       <Grid container spacing={2}>
         {events.docs.map((event) => (
           <Grid key={event.id}>

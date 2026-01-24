@@ -44,6 +44,28 @@ export const Pages: CollectionConfig = {
         condition: (data) => data.pageType === 'listings',
       },
     },
+    {
+      name: 'highlightedContent',
+      type: 'array',
+      admin: {
+        condition: (data) => ['listings', 'home'].includes(data.pageType),
+      },
+      fields: [
+        {
+          name: 'item',
+          type: 'relationship',
+          relationTo: ['events', 'clubs', 'organisations', 'pubs', 'sports'],
+        },
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          type: 'richText',
+        },
+      ],
+    },
     { name: 'content', type: 'richText' },
   ],
 }

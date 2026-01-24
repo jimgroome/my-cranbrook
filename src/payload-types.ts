@@ -146,6 +146,48 @@ export interface Page {
   slug?: string | null;
   pageType: 'default' | 'home' | 'listings';
   listing?: ('events' | 'clubs' | 'organisations' | 'pubs' | 'sports') | null;
+  highlightedContent?:
+    | {
+        item?:
+          | ({
+              relationTo: 'events';
+              value: number | Event;
+            } | null)
+          | ({
+              relationTo: 'clubs';
+              value: number | Club;
+            } | null)
+          | ({
+              relationTo: 'organisations';
+              value: number | Organisation;
+            } | null)
+          | ({
+              relationTo: 'pubs';
+              value: number | Pub;
+            } | null)
+          | ({
+              relationTo: 'sports';
+              value: number | Sport;
+            } | null);
+        title?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
   content?: {
     root: {
       type: string;
@@ -459,6 +501,14 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   pageType?: T;
   listing?: T;
+  highlightedContent?:
+    | T
+    | {
+        item?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   content?: T;
   updatedAt?: T;
   createdAt?: T;
