@@ -4,6 +4,7 @@ import { Geist } from 'next/font/google'
 import Container from '@mui/material/Container'
 import PageHeader from '@/components/page-header/PageHeader'
 import Box from '@mui/material/Box'
+import { PageFooter } from '@/components/page-footer/PageFooter'
 
 const geist = Geist({
   subsets: ['latin'],
@@ -20,14 +21,25 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={geist.className}>
-        <Container maxWidth="xl">
-          <Box display="flex" flexDirection="column" gap={2}>
-            <PageHeader />
-            <Box component="main" display="flex" flexDirection="column" gap={2}>
+        <Box component="div" display="flex" flexDirection="column" gap={2} minHeight="100vh">
+          <PageHeader />
+
+          <Box component="main" flexGrow={1}>
+            <Container
+              maxWidth="xl"
+              component="div"
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+              }}
+            >
               {children}
-            </Box>
+            </Container>
           </Box>
-        </Container>
+
+          <PageFooter />
+        </Box>
       </body>
     </html>
   )
