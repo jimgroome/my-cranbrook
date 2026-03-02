@@ -5,6 +5,8 @@ import Container from '@mui/material/Container'
 import PageHeader from '@/components/page-header/PageHeader'
 import Box from '@mui/material/Box'
 import { PageFooter } from '@/components/page-footer/PageFooter'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 const geist = Geist({
   subsets: ['latin'],
@@ -15,8 +17,13 @@ export const metadata = {
   title: 'Payload Blank Template',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // const payload = await getPayload({ config })
+  // const branding = await payload.findGlobal({
+  //   slug: 'branding',
+  // })
+
+  // console.log(branding)
 
   return (
     <html lang="en">

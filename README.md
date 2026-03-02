@@ -24,3 +24,5 @@ First clone the repo and run `pnpm i` to install everything
 
 - Hosted on Vercel
 - Should deploy on push to `main` branch
+- Images - use Uploadthing, log in via Github
+- HTML template - Clarity from UI Deck

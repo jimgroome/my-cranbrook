@@ -21,7 +21,6 @@ export const Branding: GlobalConfig = {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-      //   required: true,
     },
     {
       name: 'header',
@@ -31,7 +30,6 @@ export const Branding: GlobalConfig = {
           name: 'logo',
           type: 'upload',
           relationTo: 'media',
-          //   required: true,
         },
       ],
     },
