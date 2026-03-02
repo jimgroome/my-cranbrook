@@ -1,5 +1,4 @@
 import { Page } from '@/payload-types'
-import Box from '@mui/material/Box'
 import { HighlightedContentItem } from './HighlightedContentItem'
 
 export const HighlightedContent = ({
@@ -12,10 +11,10 @@ export const HighlightedContent = ({
   }
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
+    <div className="flex flex-col gap-2">
       {highlightedContent?.map((item) => (
         <HighlightedContentItem key={item.id} item={item} />
       ))}
-    </Box>
+    </div>
   )
 }

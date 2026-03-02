@@ -1,13 +1,9 @@
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-
 export const PageFooter = () => {
   return (
-    <Box component="footer">
-      <Container maxWidth="xl">
-        <Typography>Footer</Typography>
-      </Container>
-    </Box>
+    <footer className="bg-gray-100">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold">Footer</h2>
+      </div>
+    </footer>
   )
 }

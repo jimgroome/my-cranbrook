@@ -1,52 +1,39 @@
 import React from 'react'
 import './styles.css'
 import { Geist } from 'next/font/google'
-import Container from '@mui/material/Container'
 import PageHeader from '@/components/page-header/PageHeader'
-import Box from '@mui/material/Box'
 import { PageFooter } from '@/components/page-footer/PageFooter'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
-const geist = Geist({
-  subsets: ['latin'],
+// const geist = Geist({
+//   subsets: ['latin'],
+// })
+
+const payload = await getPayload({ config })
+const branding = await payload.findGlobal({
+  slug: 'branding',
 })
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description:
+    (branding?.description as string) || 'A blank template using Payload in a Next.js app.',
+  title: (branding?.name as string) || 'My Cranbrook',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // const payload = await getPayload({ config })
-  // const branding = await payload.findGlobal({
-  //   slug: 'branding',
-  // })
-
-  // console.log(branding)
-
   return (
     <html lang="en">
-      <body className={geist.className}>
-        <Box component="div" display="flex" flexDirection="column" gap={2} minHeight="100vh">
-          <PageHeader />
+      <body>
+        {/* <div className="flex flex-col gap-2 min-h-screen"> */}
+        <PageHeader />
 
-          <Box component="main" flexGrow={1}>
-            <Container
-              maxWidth="xl"
-              component="div"
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              }}
-            >
-              {children}
-            </Container>
-          </Box>
+        <main className="flex-grow">
+          <div className="flex flex-col gap-2 max-w-7xl mx-auto">{children}</div>
+        </main>
 
-          <PageFooter />
-        </Box>
+        <PageFooter />
+        {/* </div> */}
       </body>
     </html>
   )

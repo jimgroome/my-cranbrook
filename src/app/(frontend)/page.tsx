@@ -3,7 +3,6 @@ import React from 'react'
 
 import config from '@/payload.config'
 import './styles.css'
-import Typography from '@mui/material/Typography'
 import { HighlightedContent } from '@/components/highlighted-content/HighlightedContent'
 import { RichText } from '@/components/rich-text/RichText'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
@@ -25,7 +24,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Typography variant="h2">{page.title}</Typography>
+      <h2 className="text-2xl font-bold">{page.title}</h2>
       <RichText data={page.content as SerializedEditorState} />
       {page.highlightedContent && (
         <HighlightedContent highlightedContent={page.highlightedContent} />
