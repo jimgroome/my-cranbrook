@@ -1,12 +1,12 @@
 import type { CollectionConfig } from 'payload'
 import { slugify } from 'payload/shared'
 
-export const Events: CollectionConfig = {
-  slug: 'events',
+export const News: CollectionConfig = {
+  slug: 'news',
   admin: {
     useAsTitle: 'title',
-    group: 'Events',
-    description: 'Events happening in the area',
+    group: 'Content',
+    description: 'News articles',
   },
   fields: [
     { name: 'title', type: 'text', required: true },
@@ -20,12 +20,7 @@ export const Events: CollectionConfig = {
       },
     },
     { name: 'excerpt', type: 'text' },
-    { name: 'description', type: 'richText', required: true },
-    { name: 'date', type: 'date', required: true },
-    { name: 'town', type: 'text', required: true },
-    { name: 'location', type: 'text', required: true },
-    { name: 'postcode', type: 'text', required: true },
-    { name: 'link', type: 'text' },
+    { name: 'content', type: 'richText', required: true },
     { name: 'image', type: 'upload', relationTo: 'media' },
   ],
 }

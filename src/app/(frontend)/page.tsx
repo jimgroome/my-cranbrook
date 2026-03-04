@@ -8,6 +8,7 @@ import { RichText } from '@/components/rich-text/RichText'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { SinglePost } from '@/components/SinglePost'
 import { Hero } from '@/components/Hero'
+import { Listings } from '@/components/Listings'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -26,11 +27,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ===== Hero Section Start ===== */}
       <Hero />
-      {/* ===== Hero Section End ===== */}
 
-      {/* ====== Blog Category Section Start */}
       <section className="pt-20 lg:pt-25 pb-15">
         <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
           {/* section title */}
@@ -41,106 +39,7 @@ export default async function HomePage() {
             <p>Select a category to see more related content</p>
           </div>
 
-          <div
-            data-selected-category="All"
-            data-active-className="bg-dark border-dark text-white"
-            data-inactive-className="bg-gray border-gray-3 text-dark"
-          >
-            {/* Blog Categories Tab Start */}
-            <div className="flex flex-wrap justify-center gap-4 items-center mb-15">
-              {['All', 'Technology', 'Lifestyle', 'Travel', 'Health', 'Culture'].map((category) => (
-                <button
-                  key={category}
-                  className="rounded-full border py-2.5 px-4.5 font-medium hover:bg-dark hover:border-dark hover:text-white ease-in duration-200"
-                >
-                  {category} ({0})
-                </button>
-              ))}
-            </div>
-            {/* Blog Categories Tab End */}
-
-            {/* Blog Categories Content Start */}
-            <div>
-              {/* All content start */}
-              <div x-show="selectedCategory === 'All'">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-11 gap-x-7.5">
-                  {/* blog item */}
-
-                  {[
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                    {
-                      title: 'Stylish Kitchen And Dining Room With Functional Ideas',
-                      description:
-                        'Lorem Ipsum is simply dummy text of the print and typesetting industry...',
-                      image: 'https://picsum.photos/370/280',
-                      category: 'Technology',
-                      author: 'Adrio Devid',
-                      date: 'Sep 10, 2025',
-                      authorImage: 'https://picsum.photos/100',
-                    },
-                  ].map((post) => (
-                    <SinglePost key={post.title} post={post} />
-                  ))}
-                </div>
-              </div>
-              {/* Travel content end */}
-            </div>
-            {/* Blog Categories Content End */}
-
-            {/* Blog Show More BTN */}
-            <button className="flex justify-center font-medium text-dark border border-dark rounded-md py-3 px-7.5 hover:bg-dark hover:text-white ease-in duration-200 mx-auto mt-12.5 lg:mt-17.5">
-              Browse all Posts
-            </button>
-          </div>
+          {page.highlightedContent && <Listings listings={page.highlightedContent} />}
         </div>
       </section>
       {/* ====== Blog Category Section End */}

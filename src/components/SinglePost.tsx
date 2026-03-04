@@ -1,9 +1,20 @@
-export const SinglePost = ({ post }: { post: any }) => {
+import { Event, Media } from '@/payload-types'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import Image from 'next/image'
+
+export const SinglePost = ({ post }: { post: Event }) => {
   return (
     <div className="group">
       <div className="mb-6 overflow-hidden rounded-[10px] transition-all group-hover:scale-105">
         <a href="blog-single.html">
-          <img src={post.image} alt="image" className="w-full" />
+          {post.image && (
+            <Image
+              src={(post.image as Media).url || ''}
+              alt={(post.image as Media).alt}
+              width={(post.image as Media).width || 0}
+              height={(post.image as Media).height || 0}
+            />
+          )}
         </a>
       </div>
 
@@ -14,26 +25,18 @@ export const SinglePost = ({ post }: { post: any }) => {
           </span>
         </a>
       </h3>
-      <p>{post.description}</p>
+
+      {post.excerpt && <p className="text-sm">{post.excerpt}</p>}
 
       <div className="flex flex-wrap gap-3 items-center justify-between mt-4.5">
         <div className="flex items-center gap-2.5">
-          <a href="author.html" className="flex items-center gap-3">
-            <div className="flex w-6 h-6 rounded-full overflow-hidden">
-              <img src={post.authorImage} alt="user" />
-            </div>
-            <p className="text-sm">{post.author}</p>
-          </a>
-
-          <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-
-          <p className="text-sm">{post.date}</p>
+          <p className="text-sm">{new Date(post.date).toLocaleDateString()}</p>
         </div>
         <a
           href="category.html"
           className="inline-flex text-blue bg-blue/[0.08] font-medium text-sm py-1 px-3 rounded-full"
         >
-          {post.category}
+          {post.town}
         </a>
       </div>
     </div>

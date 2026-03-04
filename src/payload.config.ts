@@ -14,10 +14,10 @@ import { Organisations } from './collections/organisations/Organisations'
 import { Pubs } from './collections/pubs/Pubs'
 import { Sports } from './collections/sports/Sports'
 import { Pages } from './collections/pages/Pages'
-
 import { MainMenu } from './globals/MainMenu'
 import { Branding } from './globals/Branding'
 import { Social } from './globals/Social'
+import { News } from './collections/news/News'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media],
+  collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media, News],
   globals: [MainMenu, Branding, Social],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
