@@ -17,6 +17,7 @@ import { Pages } from './collections/pages/Pages'
 
 import { MainMenu } from './globals/MainMenu'
 import { Branding } from './globals/Branding'
+import { Social } from './globals/Social'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,7 +30,7 @@ export default buildConfig({
     },
   },
   collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media],
-  globals: [MainMenu, Branding],
+  globals: [MainMenu, Branding, Social],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

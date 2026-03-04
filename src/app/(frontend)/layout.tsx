@@ -28,9 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* <div className="flex flex-col gap-2 min-h-screen"> */}
         <PageHeader />
 
-        <main className="flex-grow">
-          <div className="flex flex-col gap-2 max-w-7xl mx-auto">{children}</div>
-        </main>
+        <main>{children}</main>
 
         <PageFooter />
         {/* </div> */}

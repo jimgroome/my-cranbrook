@@ -102,10 +102,12 @@ export interface Config {
   globals: {
     mainMenu: MainMenu;
     branding: Branding;
+    social: Social;
   };
   globalsSelect: {
     mainMenu: MainMenuSelect<false> | MainMenuSelect<true>;
     branding: BrandingSelect<false> | BrandingSelect<true>;
+    social: SocialSelect<false> | SocialSelect<true>;
   };
   locale: null;
   widgets: {
@@ -701,6 +703,20 @@ export interface Branding {
   createdAt?: string | null;
 }
 /**
+ * Social links for the website
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social".
+ */
+export interface Social {
+  id: number;
+  facebook?: string | null;
+  twitter?: string | null;
+  instagram?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "mainMenu_select".
  */
@@ -729,6 +745,18 @@ export interface BrandingSelect<T extends boolean = true> {
     | {
         logo?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social_select".
+ */
+export interface SocialSelect<T extends boolean = true> {
+  facebook?: T;
+  twitter?: T;
+  instagram?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

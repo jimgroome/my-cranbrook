@@ -1,7 +1,5 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
 import { HighlightedContent } from '@/components/highlighted-content/HighlightedContent'
 
 const EventsPage = async () => {
@@ -24,16 +22,16 @@ const EventsPage = async () => {
   })
   return (
     <>
-      <Typography variant="h2">{page.title}</Typography>
+      <h2 className="text-2xl font-bold">{page.title}</h2>
       <HighlightedContent highlightedContent={page.highlightedContent} />
-      <Grid container spacing={2}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {events.docs.map((event) => (
-          <Grid key={event.id}>
-            <Typography variant="h3">{event.title}</Typography>
-            <Typography variant="body1">{event.date}</Typography>
-          </Grid>
+          <div key={event.id}>
+            <h3 className="text-lg font-bold">{event.title}</h3>
+            <p className="text-sm text-gray-500">{event.date}</p>
+          </div>
         ))}
-      </Grid>
+      </div>
     </>
   )
 }

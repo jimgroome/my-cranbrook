@@ -24,5 +24,5 @@ First clone the repo and run `pnpm i` to install everything
 
 - Hosted on Vercel
 - Should deploy on push to `main` branch
-- Images - use Uploadthing, log in via Github
-- HTML template - Clarity from UI Deck
+- Images - use Vercel Blob
+- HTML template - Clarity from UI Deck https://clarity-tailwind.preview.uideck.com/
