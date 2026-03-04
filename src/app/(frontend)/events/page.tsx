@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { HighlightedContent } from '@/components/highlighted-content/HighlightedContent'
+import { SinglePost } from '@/components/SinglePost'
 
 const EventsPage = async () => {
   const payload = await getPayload({ config })
@@ -26,10 +27,7 @@ const EventsPage = async () => {
       <HighlightedContent highlightedContent={page.highlightedContent} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {events.docs.map((event) => (
-          <div key={event.id}>
-            <h3 className="text-lg font-bold">{event.title}</h3>
-            <p className="text-sm text-gray-500">{event.date}</p>
-          </div>
+          <SinglePost key={event.id} post={event} />
         ))}
       </div>
     </>

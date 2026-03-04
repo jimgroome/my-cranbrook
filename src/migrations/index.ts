@@ -3,6 +3,7 @@ import * as migration_20260124_194307_pageTypes from './20260124_194307_pageType
 import * as migration_20260124_200430_highlightedContent from './20260124_200430_highlightedContent';
 import * as migration_20260304_150244_globals from './20260304_150244_globals';
 import * as migration_20260304_160916_excerptsAndNews from './20260304_160916_excerptsAndNews';
+import * as migration_20260304_230830_moreFields from './20260304_230830_moreFields';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20260304_160916_excerptsAndNews.up,
     down: migration_20260304_160916_excerptsAndNews.down,
-    name: '20260304_160916_excerptsAndNews'
+    name: '20260304_160916_excerptsAndNews',
+  },
+  {
+    up: migration_20260304_230830_moreFields.up,
+    down: migration_20260304_230830_moreFields.down,
+    name: '20260304_230830_moreFields'
   },
 ];

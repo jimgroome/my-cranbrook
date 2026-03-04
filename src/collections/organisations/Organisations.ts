@@ -19,5 +19,12 @@ export const Organisations: CollectionConfig = {
         beforeValidate: [({ data }) => slugify(data?.title || '')],
       },
     },
+    { name: 'description', type: 'richText' },
+    { name: 'excerpt', type: 'text' },
+    { name: 'town', type: 'text' },
+    { name: 'location', type: 'text' },
+    { name: 'postcode', type: 'text' },
+    { name: 'link', type: 'text' },
+    { name: 'image', type: 'upload', relationTo: 'media' },
   ],
 }

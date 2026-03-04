@@ -20,7 +20,11 @@ export const Clubs: CollectionConfig = {
       },
     },
     { name: 'description', type: 'richText', required: true },
+    { name: 'excerpt', type: 'text' },
     { name: 'link', type: 'text' },
     { name: 'image', type: 'upload', relationTo: 'media' },
+    { name: 'town', type: 'text' },
+    { name: 'location', type: 'text' },
+    { name: 'postcode', type: 'text' },
   ],
 }

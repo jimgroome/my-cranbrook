@@ -20,6 +20,7 @@ export const News: CollectionConfig = {
       },
     },
     { name: 'excerpt', type: 'text' },
+    { name: 'date', type: 'date', required: true, defaultValue: new Date() },
     { name: 'content', type: 'richText', required: true },
     { name: 'image', type: 'upload', relationTo: 'media' },
   ],

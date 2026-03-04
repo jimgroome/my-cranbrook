@@ -20,9 +20,11 @@ export const Sports: CollectionConfig = {
       },
     },
     { name: 'description', type: 'richText', required: true },
+    { name: 'excerpt', type: 'text' },
     { name: 'image', type: 'upload', relationTo: 'media' },
     { name: 'link', type: 'text' },
-    { name: 'town', type: 'text', required: true },
-    { name: 'location', type: 'text', required: true },
+    { name: 'town', type: 'text' },
+    { name: 'location', type: 'text' },
+    { name: 'postcode', type: 'text' },
   ],
 }

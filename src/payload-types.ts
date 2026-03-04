@@ -292,8 +292,12 @@ export interface Club {
     };
     [k: string]: unknown;
   };
+  excerpt?: string | null;
   link?: string | null;
   image?: (number | null) | Media;
+  town?: string | null;
+  location?: string | null;
+  postcode?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -307,6 +311,27 @@ export interface Organisation {
   id: number;
   title: string;
   slug?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  excerpt?: string | null;
+  town?: string | null;
+  location?: string | null;
+  postcode?: string | null;
+  link?: string | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -335,8 +360,10 @@ export interface Pub {
     };
     [k: string]: unknown;
   };
-  town: string;
-  location: string;
+  excerpt?: string | null;
+  town?: string | null;
+  location?: string | null;
+  postcode?: string | null;
   link?: string | null;
   image?: (number | null) | Media;
   updatedAt: string;
@@ -367,10 +394,12 @@ export interface Sport {
     };
     [k: string]: unknown;
   };
+  excerpt?: string | null;
   image?: (number | null) | Media;
   link?: string | null;
-  town: string;
-  location: string;
+  town?: string | null;
+  location?: string | null;
+  postcode?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -412,6 +441,7 @@ export interface News {
   title: string;
   slug?: string | null;
   excerpt?: string | null;
+  date: string;
   content: {
     root: {
       type: string;
@@ -580,8 +610,12 @@ export interface ClubsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  excerpt?: T;
   link?: T;
   image?: T;
+  town?: T;
+  location?: T;
+  postcode?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -592,6 +626,13 @@ export interface ClubsSelect<T extends boolean = true> {
 export interface OrganisationsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  description?: T;
+  excerpt?: T;
+  town?: T;
+  location?: T;
+  postcode?: T;
+  link?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -603,8 +644,10 @@ export interface PubsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  excerpt?: T;
   town?: T;
   location?: T;
+  postcode?: T;
   link?: T;
   image?: T;
   updatedAt?: T;
@@ -618,10 +661,12 @@ export interface SportsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  excerpt?: T;
   image?: T;
   link?: T;
   town?: T;
   location?: T;
+  postcode?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -673,6 +718,7 @@ export interface NewsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   excerpt?: T;
+  date?: T;
   content?: T;
   image?: T;
   updatedAt?: T;
