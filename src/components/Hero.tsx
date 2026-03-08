@@ -1,123 +1,94 @@
-export const Hero = () => {
+import Link from 'next/link'
+import type { ListingCardItem } from '@/lib/frontend/listings'
+import { getCollectionBadgeClass, getCollectionLabel, getListingHref } from '@/lib/frontend/listings'
+
+export const Hero = ({ items }: { items: ListingCardItem[] }) => {
+  if (!items.length) {
+    return null
+  }
+
+  const [featured, ...secondary] = items
+
   return (
-    <section id="home" className="rounded-b-[50px] relative overflow-hidden z-10 pb-15 pt-34">
-      {/* Hero BG Shapes Start */}
+    <section id="home" className="relative z-10 overflow-hidden rounded-b-[50px] pb-15 pt-34">
       <div>
-        <div className="absolute bottom-0 left-0 rounded-b-[50px] w-full h-full bg-gray"></div>
-        <div className="hidden lg:block absolute bottom-0 left-0 rounded-b-[50px] w-full h-full">
-          <img src="/hero-bg.svg" alt="hero" />
+        <div className="absolute bottom-0 left-0 h-full w-full rounded-b-[50px] bg-gray" />
+        <div className="absolute bottom-0 left-0 hidden h-full w-full rounded-b-[50px] lg:block">
+          <img src="/hero-bg.svg" alt="hero background" />
         </div>
       </div>
-      {/* Hero BG Shapes End */}
 
-      {/* Hero Content Start */}
-      <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0 relative z-1">
+      <div className="relative z-1 mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
         <div className="flex flex-wrap gap-x-7.5 gap-y-9">
-          {/* Hero item */}
-          <div className="max-w-[1170px] w-full flex flex-col lg:flex-row lg:items-center gap-7.5 lg:gap-11 bg-white shadow-1 rounded-xl p-4 lg:p-2.5">
-            <div className="lg:max-w-[536px] w-full">
-              <a href="blog-single.html">
-                <img className="w-full" src="https://picsum.photos/536/320" alt="hero" />
-              </a>
+          <article className="flex w-full max-w-[1170px] flex-col gap-7.5 rounded-xl bg-white p-4 shadow-1 lg:flex-row lg:items-center lg:gap-11 lg:p-2.5">
+            <div className="w-full lg:max-w-[536px]">
+              <Link href={getListingHref(featured.relationTo, featured.slug)}>
+                {featured.imageUrl ? (
+                  <img src={featured.imageUrl} alt={featured.imageAlt || featured.title} className="w-full" />
+                ) : (
+                  <div className="h-80 w-full bg-gray" />
+                )}
+              </Link>
             </div>
 
-            <div className="lg:max-w-[540px] w-full">
-              <a
-                href="category.html"
-                className="inline-flex text-purple-dark bg-purple/[0.08] font-medium text-sm py-1 px-3 rounded-full mb-4"
+            <div className="w-full lg:max-w-[540px]">
+              <span
+                className={`mb-4 inline-flex rounded-full px-3 py-1 text-sm font-medium ${getCollectionBadgeClass(featured.relationTo)}`}
               >
-                Lifestyle
-              </a>
-              <h1 className="font-bold text-custom-4 xl:text-heading-4 text-dark mb-4">
-                <a href="blog-single.html">
-                  Begin here to obtain a brief summary encompassing all the essential
-                </a>
+                {getCollectionLabel(featured.relationTo)}
+              </span>
+              <h1 className="mb-4 text-custom-4 font-bold text-dark xl:text-heading-4">
+                <Link href={getListingHref(featured.relationTo, featured.slug)}>{featured.title}</Link>
               </h1>
-              <p className="max-w-[524px]">
-                This comprehensive post serves as your cheat-sheet to swiftly familiarize yourself
-                with Ghost. Packed with crucial...
-              </p>
-              <div className="flex items-center gap-2.5 mt-5">
-                <a href="author.html" className="flex items-center gap-3">
-                  <div className="flex w-6 h-6 rounded-full overflow-hidden">
-                    <img src="https://picsum.photos/100" alt="user" />
-                  </div>
-                  <p className="text-sm">Adrio Devid</p>
-                </a>
-
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-
-                <p className="text-sm">Sep 10, 2025</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero item */}
-          <div className="lg:max-w-[570px] w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-1 rounded-xl p-2.5">
-            <div className="lg:max-w-[238px] w-full">
-              <a href="blog-single.html">
-                <img className="w-full" src="https://picsum.photos/238/180" alt="hero" />
-              </a>
-            </div>
-
-            <div className="lg:max-w-[272px] w-full">
-              <a
-                href="category.html"
-                className="inline-flex text-blue bg-blue/[0.08] font-medium text-sm py-1 px-3 rounded-full mb-4"
-              >
-                Technology
-              </a>
-              <h2 className="font-semibold text-custom-lg text-dark mb-3">
-                <a href="blog-single.html">
-                  14 Innovative Architectural Designs to Create a Vast Interior Space
-                </a>
-              </h2>
-              <div className="flex items-center gap-2.5">
-                <p className="text-sm">
-                  <a href="author.html">By Adrio Devid</a>
+              {featured.excerpt && <p className="max-w-[524px]">{featured.excerpt}</p>}
+              <div className="mt-5 flex items-center gap-2.5 text-sm">
+                <p>{featured.town || 'Cranbrook'}</p>
+                <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
+                <p>
+                  {featured.date
+                    ? new Date(featured.date).toLocaleDateString('en-GB')
+                    : featured.location || 'Kent'}
                 </p>
-
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-
-                <p className="text-sm">Sep 10, 2025</p>
               </div>
             </div>
-          </div>
+          </article>
 
-          {/* Hero item */}
-          <div className="lg:max-w-[570px] w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-1 rounded-xl p-2.5">
-            <div className="lg:max-w-[238px] w-full">
-              <a href="blog-single.html">
-                <img className="w-full" src="https://picsum.photos/238/180" alt="hero" />
-              </a>
-            </div>
-
-            <div className="lg:max-w-[272px] w-full">
-              <a
-                href="category.html"
-                className="inline-flex text-green-dark bg-green/[0.08] font-medium text-sm py-1 px-3 rounded-full mb-4"
-              >
-                Travel
-              </a>
-              <h2 className="font-semibold text-custom-lg text-dark mb-3">
-                <a href="blog-single.html">
-                  Traveller Visiting Ice Cave With Amazing Eye-catching view with nature
-                </a>
-              </h2>
-              <div className="flex items-center gap-2.5">
-                <p className="text-sm">
-                  <a href="author.html">By Adrio Devid</a>
-                </p>
-
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-
-                <p className="text-sm">Sep 10, 2025</p>
+          {secondary.slice(0, 2).map((item) => (
+            <article
+              key={`${item.relationTo}-${item.id}`}
+              className="flex w-full flex-col gap-6 rounded-xl bg-white p-2.5 shadow-1 sm:flex-row sm:items-center lg:max-w-[570px]"
+            >
+              <div className="w-full lg:max-w-[238px]">
+                <Link href={getListingHref(item.relationTo, item.slug)}>
+                  {item.imageUrl ? (
+                    <img src={item.imageUrl} alt={item.imageAlt || item.title} className="w-full" />
+                  ) : (
+                    <div className="h-[180px] w-full bg-gray" />
+                  )}
+                </Link>
               </div>
-            </div>
-          </div>
+
+              <div className="w-full lg:max-w-[272px]">
+                <span
+                  className={`mb-4 inline-flex rounded-full px-3 py-1 text-sm font-medium ${getCollectionBadgeClass(item.relationTo)}`}
+                >
+                  {getCollectionLabel(item.relationTo)}
+                </span>
+                <h2 className="mb-3 text-custom-lg font-semibold text-dark">
+                  <Link href={getListingHref(item.relationTo, item.slug)}>{item.title}</Link>
+                </h2>
+                <div className="flex items-center gap-2.5 text-sm">
+                  <p>{item.town || 'Cranbrook'}</p>
+                  <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
+                  <p>
+                    {item.date ? new Date(item.date).toLocaleDateString('en-GB') : item.location || 'Kent'}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
-      {/* Hero Content End */}
     </section>
   )
 }

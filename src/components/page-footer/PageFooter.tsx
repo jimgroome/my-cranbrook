@@ -1,72 +1,52 @@
+import Link from 'next/link'
 import { SocialLinks } from '../SocialLinks'
 
 export const PageFooter = () => {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="relative z-10 py-8 border-t border-gray-3">
-      <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
-        <div className="flex flex-wrap items-center justify-center flex-col gap-4 lg:gap-0 lg:flex-row lg:justify-between">
+    <footer className="relative z-10 border-t border-gray-3 py-8">
+      <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
+        <div className="flex flex-col flex-wrap items-center justify-center gap-4 lg:flex-row lg:justify-between lg:gap-0">
           <div>
-            <p className="text-custom-sm">&copy; 2025 Clarity. All rights reserved</p>
+            <p className="text-custom-sm">&copy; {year} My Cranbrook. All rights reserved</p>
           </div>
 
           <div>
-            <ul className="flex flex-wrap items-center gap-2.5">
+            <ul className="flex flex-wrap items-center gap-2.5 text-custom-sm">
               <li>
-                <a
-                  href="privacy-policy.html"
-                  className="group leading-none flex text-custom-sm ease-in duration-200 hover:text-dark"
-                >
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_1px]">
-                    Privacy
+                <Link href="/events" className="group leading-none hover:text-dark">
+                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
+                    Events
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
+                <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
               </li>
               <li>
-                <a
-                  href="privacy-policy.html"
-                  className="group leading-none flex text-custom-sm ease-in duration-200 hover:text-dark"
-                >
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_1px]">
-                    Terms
+                <Link href="/organisations" className="group leading-none hover:text-dark">
+                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
+                    Organisations
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
+                <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
               </li>
               <li>
-                <a
-                  href="signup.html"
-                  className="group leading-none flex text-custom-sm ease-in duration-200 hover:text-dark"
-                >
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_1px]">
-                    Contact
+                <Link href="/pubs" className="group leading-none hover:text-dark">
+                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
+                    Pubs
                   </span>
-                </a>
-              </li>
-              <li>
-                <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-              </li>
-              <li>
-                <a
-                  href="signup.html"
-                  className="group leading-none flex text-custom-sm ease-in duration-200 hover:text-dark"
-                >
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_1px]">
-                    Contribute
-                  </span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           <div>
             <div className="flex items-center gap-3">
-              <p className="font-medium text-custom-sm text-dark">Follow Us:</p>
-
+              <p className="text-custom-sm font-medium text-dark">Follow Us:</p>
               <SocialLinks />
             </div>
           </div>
