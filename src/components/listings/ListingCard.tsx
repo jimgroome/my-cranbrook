@@ -6,7 +6,7 @@ export const ListingCard = ({ item }: { item: ListingCardItem }) => {
   const href = getListingHref(item.relationTo, item.slug)
 
   return (
-    <article className="group">
+    <article className="group flex h-full flex-col">
       <div className="mb-6 overflow-hidden rounded-[10px]">
         <Link href={href} className="block">
           {item.imageUrl ? (
@@ -29,7 +29,7 @@ export const ListingCard = ({ item }: { item: ListingCardItem }) => {
         </span>
       </div>
 
-      <h3>
+      <h3 className="mb-3.5">
         <Link href={href} className="mb-3.5 block text-xl font-bold text-dark">
           <span className="bg-linear-to-r from-primary/50 to-primary/40 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]">
             {item.title}
@@ -37,9 +37,9 @@ export const ListingCard = ({ item }: { item: ListingCardItem }) => {
         </Link>
       </h3>
 
-      {item.excerpt && <p className="text-sm">{item.excerpt}</p>}
+      {item.excerpt && <p className="min-h-[3.5rem] text-sm">{item.excerpt}</p>}
 
-      <div className="mt-4.5 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4.5">
         <div className="text-sm">
           {item.date ? new Date(item.date).toLocaleDateString('en-GB') : item.location || item.town || ''}
         </div>

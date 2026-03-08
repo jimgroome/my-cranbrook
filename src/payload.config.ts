@@ -28,6 +28,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    autoLogin: {
+      email: 'james@jgroome.com',
+      password: 'password',
+    },
   },
   collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media, News],
   globals: [MainMenu, Branding, Social],

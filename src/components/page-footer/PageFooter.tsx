@@ -1,8 +1,32 @@
+import config from '@/payload.config'
+import type { MainMenu, Page } from '@/payload-types'
+import { getPageHref } from '@/lib/frontend/listings'
+import { getPayload } from 'payload'
 import Link from 'next/link'
 import { SocialLinks } from '../SocialLinks'
 
-export const PageFooter = () => {
+const toFooterMenuItems = (mainMenu: MainMenu | null) => {
+  if (!mainMenu?.items?.length) {
+    return []
+  }
+
+  return mainMenu.items
+    .map((item) => {
+      const page = item?.link as Page | null
+
+      return {
+        href: getPageHref(page?.slug),
+        label: item?.label || page?.title || '',
+      }
+    })
+    .filter((item) => Boolean(item.href && item.label))
+}
+
+export const PageFooter = async () => {
   const year = new Date().getFullYear()
+  const payload = await getPayload({ config })
+  const mainMenu = await payload.findGlobal({ slug: 'mainMenu' })
+  const menuItems = toFooterMenuItems(mainMenu as MainMenu)
 
   return (
     <footer className="relative z-10 border-t border-gray-3 py-8">
@@ -14,33 +38,20 @@ export const PageFooter = () => {
 
           <div>
             <ul className="flex flex-wrap items-center gap-2.5 text-custom-sm">
-              <li>
-                <Link href="/events" className="group leading-none hover:text-dark">
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-                    Events
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
-              </li>
-              <li>
-                <Link href="/organisations" className="group leading-none hover:text-dark">
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-                    Organisations
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
-              </li>
-              <li>
-                <Link href="/pubs" className="group leading-none hover:text-dark">
-                  <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-                    Pubs
-                  </span>
-                </Link>
-              </li>
+              {menuItems.flatMap((item, index) => [
+                  <li key={`${item.href}-${item.label}`}>
+                    <Link href={item.href} className="group leading-none hover:text-dark">
+                      <span className="bg-linear-to-r from-dark to-dark bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
+                        {item.label}
+                      </span>
+                    </Link>
+                  </li>,
+                  index < menuItems.length - 1 ? (
+                    <li key={`${item.href}-${item.label}-dot`}>
+                      <span className="flex h-[3px] w-[3px] rounded-full bg-dark-2" />
+                    </li>
+                  ) : null,
+                ])}
             </ul>
           </div>
 

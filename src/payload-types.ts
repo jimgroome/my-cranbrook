@@ -149,8 +149,33 @@ export interface Page {
   id: number;
   title: string;
   slug?: string | null;
-  pageType: 'default' | 'home' | 'listings';
-  listing?: ('events' | 'clubs' | 'organisations' | 'pubs' | 'sports') | null;
+  pageType: 'default' | 'home' | 'listings' | 'directory';
+  /**
+   * Drag and drop to reorder directory sections.
+   */
+  directorySections?:
+    | {
+        section: 'sports' | 'pubs' | 'organisations' | 'clubs';
+        /**
+         * Pick up to 3 sports items for this section.
+         */
+        sportsItems?: (number | Sport)[] | null;
+        /**
+         * Pick up to 3 pub items for this section.
+         */
+        pubsItems?: (number | Pub)[] | null;
+        /**
+         * Pick up to 3 organisation items for this section.
+         */
+        organisationsItems?: (number | Organisation)[] | null;
+        /**
+         * Pick up to 3 club items for this section.
+         */
+        clubsItems?: (number | Club)[] | null;
+        id?: string | null;
+      }[]
+    | null;
+  listing?: ('news' | 'events' | 'clubs' | 'organisations' | 'pubs' | 'sports') | null;
   highlightedContent?:
     | {
         item?:
@@ -212,16 +237,15 @@ export interface Page {
   createdAt: string;
 }
 /**
- * Events happening in the area
+ * Sports clubs in the area
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
+ * via the `definition` "sports".
  */
-export interface Event {
+export interface Sport {
   id: number;
   title: string;
   slug?: string | null;
-  excerpt?: string | null;
   description: {
     root: {
       type: string;
@@ -237,12 +261,12 @@ export interface Event {
     };
     [k: string]: unknown;
   };
-  date: string;
-  town: string;
-  location: string;
-  postcode: string;
-  link?: string | null;
+  excerpt?: string | null;
   image?: (number | null) | Media;
+  link?: string | null;
+  town?: string | null;
+  location?: string | null;
+  postcode?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -268,12 +292,12 @@ export interface Media {
   focalY?: number | null;
 }
 /**
- * Clubs in the area
+ * Pubs and bars in the area
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clubs".
+ * via the `definition` "pubs".
  */
-export interface Club {
+export interface Pub {
   id: number;
   title: string;
   slug?: string | null;
@@ -293,11 +317,11 @@ export interface Club {
     [k: string]: unknown;
   };
   excerpt?: string | null;
-  link?: string | null;
-  image?: (number | null) | Media;
   town?: string | null;
   location?: string | null;
   postcode?: string | null;
+  link?: string | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -336,12 +360,12 @@ export interface Organisation {
   createdAt: string;
 }
 /**
- * Pubs and bars in the area
+ * Clubs in the area
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pubs".
+ * via the `definition` "clubs".
  */
-export interface Pub {
+export interface Club {
   id: number;
   title: string;
   slug?: string | null;
@@ -361,24 +385,25 @@ export interface Pub {
     [k: string]: unknown;
   };
   excerpt?: string | null;
+  link?: string | null;
+  image?: (number | null) | Media;
   town?: string | null;
   location?: string | null;
   postcode?: string | null;
-  link?: string | null;
-  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Sports clubs in the area
+ * Events happening in the area
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sports".
+ * via the `definition` "events".
  */
-export interface Sport {
+export interface Event {
   id: number;
   title: string;
   slug?: string | null;
+  excerpt?: string | null;
   description: {
     root: {
       type: string;
@@ -394,12 +419,12 @@ export interface Sport {
     };
     [k: string]: unknown;
   };
-  excerpt?: string | null;
-  image?: (number | null) | Media;
+  date: string;
+  town: string;
+  location: string;
+  postcode: string;
   link?: string | null;
-  town?: string | null;
-  location?: string | null;
-  postcode?: string | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -571,6 +596,16 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   pageType?: T;
+  directorySections?:
+    | T
+    | {
+        section?: T;
+        sportsItems?: T;
+        pubsItems?: T;
+        organisationsItems?: T;
+        clubsItems?: T;
+        id?: T;
+      };
   listing?: T;
   highlightedContent?:
     | T

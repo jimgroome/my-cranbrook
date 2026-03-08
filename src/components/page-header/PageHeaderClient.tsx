@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { SocialIconLinks } from '../SocialIconLinks'
 
 type MenuItem = {
   href: string
@@ -66,41 +67,7 @@ export const PageHeaderClient = ({ menuItems, logoUrl, logoAlt, social }: Props)
           </nav>
 
           <div className="mt-7 flex flex-wrap items-center gap-8.5 lg:mt-0">
-            <div className="flex items-center gap-1.5">
-              {social.facebook && (
-                <a
-                  aria-label="Facebook"
-                  href={social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7.5 w-7.5 items-center justify-center rounded-full hover:bg-gray-2"
-                >
-                  f
-                </a>
-              )}
-              {social.twitter && (
-                <a
-                  aria-label="Twitter"
-                  href={social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7.5 w-7.5 items-center justify-center rounded-full hover:bg-gray-2"
-                >
-                  x
-                </a>
-              )}
-              {social.instagram && (
-                <a
-                  aria-label="Instagram"
-                  href={social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7.5 w-7.5 items-center justify-center rounded-full hover:bg-gray-2"
-                >
-                  i
-                </a>
-              )}
-            </div>
+            <SocialIconLinks social={social} idPrefix="header-social" />
           </div>
         </div>
       </div>
