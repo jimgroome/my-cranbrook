@@ -15,6 +15,7 @@ import { Pubs } from './collections/pubs/Pubs'
 import { Sports } from './collections/sports/Sports'
 import { Pages } from './collections/pages/Pages'
 import { MainMenu } from './globals/MainMenu'
+import { PopoutMenu } from './globals/PopoutMenu'
 import { Branding } from './globals/Branding'
 import { Social } from './globals/Social'
 import { News } from './collections/news/News'
@@ -34,7 +35,7 @@ export default buildConfig({
     },
   },
   collections: [Pages, Events, Clubs, Organisations, Pubs, Sports, Users, Media, News],
-  globals: [MainMenu, Branding, Social],
+  globals: [MainMenu, PopoutMenu, Branding, Social],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

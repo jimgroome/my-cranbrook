@@ -103,11 +103,13 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     mainMenu: MainMenu;
+    popoutMenu: PopoutMenu;
     branding: Branding;
     social: Social;
   };
   globalsSelect: {
     mainMenu: MainMenuSelect<false> | MainMenuSelect<true>;
+    popoutMenu: PopoutMenuSelect<false> | PopoutMenuSelect<true>;
     branding: BrandingSelect<false> | BrandingSelect<true>;
     social: SocialSelect<false> | SocialSelect<true>;
   };
@@ -218,6 +220,10 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Pick the images to use in the homepage carousel.
+   */
+  carouselImages?: (number | Media)[] | null;
   content?: {
     root: {
       type: string;
@@ -615,6 +621,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  carouselImages?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -818,6 +825,24 @@ export interface MainMenu {
   createdAt?: string | null;
 }
 /**
+ * Pop-out menu for the website
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popoutMenu".
+ */
+export interface PopoutMenu {
+  id: number;
+  items?:
+    | {
+        label?: string | null;
+        link?: (number | null) | Page;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Branding for the website
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -853,6 +878,22 @@ export interface Social {
  * via the `definition` "mainMenu_select".
  */
 export interface MainMenuSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popoutMenu_select".
+ */
+export interface PopoutMenuSelect<T extends boolean = true> {
   items?:
     | T
     | {

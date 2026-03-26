@@ -6,6 +6,7 @@ import * as migration_20260304_160916_excerptsAndNews from './20260304_160916_ex
 import * as migration_20260304_230830_moreFields from './20260304_230830_moreFields';
 import * as migration_20260308_085310_moreFields from './20260308_085310_moreFields';
 import * as migration_20260308_132756_moreFields from './20260308_132756_moreFields';
+import * as migration_20260326_144533_popoutMenuAndCarouselImages from './20260326_144533_popoutMenuAndCarouselImages';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20260308_132756_moreFields.up,
     down: migration_20260308_132756_moreFields.down,
-    name: '20260308_132756_moreFields'
+    name: '20260308_132756_moreFields',
+  },
+  {
+    up: migration_20260326_144533_popoutMenuAndCarouselImages.up,
+    down: migration_20260326_144533_popoutMenuAndCarouselImages.down,
+    name: '20260326_144533_popoutMenuAndCarouselImages'
   },
 ];

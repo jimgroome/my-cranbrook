@@ -163,6 +163,16 @@ export const Pages: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'carouselImages',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true,
+      admin: {
+        condition: (data) => data.pageType === 'home',
+        description: 'Pick the images to use in the homepage carousel.',
+      },
+    },
     { name: 'content', type: 'richText' },
   ],
 }

@@ -1,7 +1,7 @@
-import { Hero } from '@/components/Hero'
-import { Listings } from '@/components/Listings'
+import { HomepageCarousel } from '@/components/HomepageCarousel'
 import config from '@/payload.config'
-import { fromHighlightedContent, getCollectionLabel, toListingCardItem } from '@/lib/frontend/listings'
+import { getCollectionLabel } from '@/lib/frontend/listings'
+import type { Media } from '@/payload-types'
 import { getPayload } from 'payload'
 import Link from 'next/link'
 
@@ -22,12 +22,8 @@ export default async function HomePage() {
   ])
 
   const page = pageData.docs[0]
-
-  const heroFromHighlighted = fromHighlightedContent(page?.highlightedContent)
-  const fallbackHero = events.docs
-    .map((event) => toListingCardItem('events', event))
-    .filter((event): event is NonNullable<typeof event> => Boolean(event))
-  const heroItems = heroFromHighlighted.length ? heroFromHighlighted.slice(0, 3) : fallbackHero.slice(0, 3)
+  const carouselImages =
+    page?.carouselImages?.filter((image): image is Media => typeof image === 'object') || []
 
   const listingCounts = [
     { slug: 'events', total: events.totalDocs },
@@ -39,7 +35,13 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero items={heroItems} />
+      {carouselImages.length ? (
+        <HomepageCarousel
+          images={carouselImages}
+          title={page?.title || 'My Cranbrook'}
+          description="Discover events, clubs, organisations, pubs and sports happening in Cranbrook, Kent."
+        />
+      ) : null}
 
       <section className="pb-15 pt-20 lg:pt-25">
         <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
@@ -61,8 +63,6 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
-
-          {page?.highlightedContent && <Listings listings={page.highlightedContent} />}
         </div>
       </section>
 
